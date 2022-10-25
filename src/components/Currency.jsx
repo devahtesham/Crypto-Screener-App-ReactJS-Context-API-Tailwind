@@ -10,7 +10,12 @@ const Currency = () => {
         >
           currency :
         </label>
-        <input type="text" />
+        <input
+          type="text"
+          name="currency"
+          placeholder="usd"
+          className="w-16 rounded bg-gra-200 pl-2 required outline-0 border border-transparent focus: border-cyan placeholder:text-gray-100 "
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
