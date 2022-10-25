@@ -6,15 +6,27 @@ import { cryptoContext } from "../context/CryptoContext";
 // create another component namely SearchInputDataComp bcz the state present in it render component again and again when its updated so our api hit bcz of its re-rendering , so we separate the inputValue state in other comp and debouncing function in separate comp
 const SearchInputDataComp = ({ handleDebounceFunc }) => {
   const [inputValue, setInputValue] = useState("");
+  const { searchInputData, setCoinSearch } = useContext(cryptoContext);
   const inputValueHandler = (e) => {
     let inputText = e.target.value;
     setInputValue(inputText);
     handleDebounceFunc(inputText);
   };
+  const coinDataHandler = (coin) => {
+    console.log(coin);
+    setCoinSearch(coin);
+  };
   return (
     <>
       {/* search form */}
-      <form className="w-96 relative flex items-center ml-7 font-nunito">
+      <form
+        className="w-96 relative flex items-center ml-7 font-nunito"
+        onSubmit={(e) => {
+          e.preventDefault();
+          coinDataHandler(inputValue);
+          setInputValue("");
+        }}
+      >
         <input
           type="text"
           name="search"
@@ -29,9 +41,32 @@ const SearchInputDataComp = ({ handleDebounceFunc }) => {
       </form>
       {/* form dropdown while typing */}
       {inputValue.length > 0 ? (
-        <ul className="absolute top-11 right-0 overflow-x-hidden w-full h-96 rounded py-2 bg-gray-200 bg-opacity-60 backdrop-blur-md">
-          <li>bitcoin</li>
-          <li>etherium</li>
+        <ul className="absolute top-11 right-0 overflow-x-hidden w-96 h-96 rounded py-2 bg-gray-200 bg-opacity-60 backdrop-blur-md">
+          {/* <li>bitcoin</li>
+          <li>etherium</li> */}
+          {searchInputData ? (
+            searchInputData.map((coin) => {
+              return (
+                <li
+                  key={coin.id}
+                  className="flex items-center ml-4 my-2 cursor-pointer"
+                  onClick={() => {
+                    coinDataHandler(coin.id);
+                    setInputValue("");
+                  }}
+                >
+                  <img
+                    src={coin.thumb}
+                    alt={coin.name}
+                    className="w-[1rem] h-[1rem] mx-2.5"
+                  />
+                  <span className=""> {coin.name} </span>
+                </li>
+              );
+            })
+          ) : (
+            <h2>Please Wait ...</h2>
+          )}
         </ul>
       ) : null}
     </>
@@ -44,7 +79,7 @@ const Search = () => {
   // debouncing using loadash liabrary
   const debouncFunc = debounce((val) => {
     getSearchData(val);
-  }, 2500);
+  }, 1000);
 
   //   =============== PREVENT UNNECESSARY API CALLS (DEBOUNCING IMPLEMENTATION using useEffect and setTimeout) ==================
   //   useEffect(() => {
@@ -57,9 +92,9 @@ const Search = () => {
   //   }, [inputValue]);
   //   =============== PREVENT UNNECESSARY API CALLS (DEBOUNCING IMPLEMENTATION) ==================
   return (
-    <>
+    <div className="relative">
       <SearchInputDataComp handleDebounceFunc={debouncFunc} />
-    </>
+    </div>
   );
 };
 
