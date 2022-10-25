@@ -16,16 +16,16 @@ const SearchInputDataComp = ({ handleDebounceFunc }) => {
     console.log(coin);
     setCoinSearch(coin);
   };
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    coinDataHandler(inputValue);
+  };
   return (
     <>
       {/* search form */}
       <form
         className="w-96 relative flex items-center ml-7 font-nunito"
-        onSubmit={(e) => {
-          e.preventDefault();
-          coinDataHandler(inputValue);
-          setInputValue("");
-        }}
+        onSubmit={formSubmitHandler}
       >
         <input
           type="text"
@@ -65,7 +65,13 @@ const SearchInputDataComp = ({ handleDebounceFunc }) => {
               );
             })
           ) : (
-            <h2>Please Wait ...</h2>
+            <div className="w-full h-full flex items-center justify-center">
+              <div
+                className="w-8 h-8 border-4 border-cyan rounded-full border-b-gray-200 animate-spin"
+                role="status"
+              ></div>
+              <span className="ml-3">Searching ...</span>
+            </div>
           )}
         </ul>
       ) : null}
@@ -77,9 +83,10 @@ const Search = () => {
 
   const { getSearchData } = useContext(cryptoContext);
   // debouncing using loadash liabrary
+
   const debouncFunc = debounce((val) => {
     getSearchData(val);
-  }, 1000);
+  }, 3000);
 
   //   =============== PREVENT UNNECESSARY API CALLS (DEBOUNCING IMPLEMENTATION using useEffect and setTimeout) ==================
   //   useEffect(() => {
