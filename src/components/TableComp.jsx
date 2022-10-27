@@ -5,7 +5,7 @@ const TableComp = () => {
   const { cryptoData } = useContext(cryptoContext);
   // console.log(cryptoData);
   return (
-    <div className="mt-9 flex flex-col border border-gray-100 rounded">
+    <div className="mt-9 flex flex-col border border-gray-100 rounded bg-gray-300">
       {cryptoData ? (
         <table className="w-full table-auto">
           <thead className="capitalize text-base text-gray-100 font-medium border-b border-gray-100">
