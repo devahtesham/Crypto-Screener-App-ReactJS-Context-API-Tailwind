@@ -10,8 +10,8 @@ const Home = () => {
     <>
       <ContextProvider>
         <main className=" text-white flex flex-col items-center justify-center w-full h-full font-nunito relative">
-          <div className="w-screen h-screen fixed -z-10">
-            <ParticleJS id="tsparticles" />
+          <div className="w-screen h-screen fixed -z-10 bg-gray-300 top-0 left-0 right-0">
+            {/* <ParticleJS id="tsparticles" /> */}
           </div>
           <Logo />
           <Navigation />

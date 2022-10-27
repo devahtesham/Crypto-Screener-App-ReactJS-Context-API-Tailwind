@@ -12,11 +12,18 @@ export const ContextProvider = ({ children }) => {
   const [cryptoData, setCryptoData] = useState();
   const [searchInputData, setSearchInputData] = useState();
   const [coinSearch, setCoinSearch] = useState("");
+  // currency
+  const [currency, setCurrency] = useState("usd");
+  // display table w.r.t currency
+  const [isTableDisplay, setIsTableDisplay] = useState(true);
+  // sorting order
+  const [sortOrder, setSortOrder] = useState("market_cap_desc");
+  console.log("sortOrder", sortOrder);
   // this function is for getting all the coins details
   const getApiData = async () => {
     try {
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinSearch}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortOrder}&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       );
       // console.log(response.data);
       const data = response.data;
@@ -40,12 +47,22 @@ export const ContextProvider = ({ children }) => {
   };
   useEffect(() => {
     getApiData();
-  }, [coinSearch]);
-  console.log("coinSearch", coinSearch);
+  }, [coinSearch, currency, sortOrder]);
+  // console.log("coinSearch", coinSearch);
 
   return (
     <cryptoContext.Provider
-      value={{ cryptoData, searchInputData, getSearchData, setCoinSearch }}
+      value={{
+        cryptoData,
+        searchInputData,
+        getSearchData,
+        setCoinSearch,
+        currency,
+        setCurrency,
+        setIsTableDisplay,
+        isTableDisplay,
+        setSortOrder,
+      }}
     >
       {children}
     </cryptoContext.Provider>
