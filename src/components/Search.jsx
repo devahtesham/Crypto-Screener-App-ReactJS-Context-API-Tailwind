@@ -41,7 +41,7 @@ const SearchInputDataComp = ({ handleDebounceFunc }) => {
       </form>
       {/* form dropdown while typing */}
       {inputValue.length > 0 ? (
-        <ul className="absolute top-11 right-0 overflow-x-hidden w-96 h-96 rounded py-2 bg-gray-200 bg-opacity-60 backdrop-blur-md">
+        <ul className="absolute top-11 right-0 overflow-x-hidden w-96 h-96 rounded py-2 bg-gray-200 bg-opacity-60 backdrop-blur-md scrollbar-thin scrollbar-thumb-cyan scrollbar-track-gray-200">
           {/* <li>bitcoin</li>
           <li>etherium</li> */}
           {searchInputData ? (

@@ -1,128 +1,140 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import paginationArrow from "../assets/pagination-arrow.svg";
+import { cryptoContext } from "../context/CryptoContext";
+import PerPageForm from "./PerPageForm";
 const Pagination = () => {
   // state for showing current page
-  const [currentPage, setCurrentPage] = useState(1);
-  const tot_pages = 250;
+  const { setCurrDisplayPg, currDisplayPg, totalPages, perPage, cryptoData } =
+    useContext(cryptoContext);
+  const tot_pages = Math.ceil(totalPages / perPage);
   const nextPageHandler = (e) => {
-    if (currentPage === tot_pages) {
+    if (currDisplayPg === tot_pages) {
       return;
     } else {
-      setCurrentPage(currentPage + 1);
+      setCurrDisplayPg(currDisplayPg + 1);
     }
   };
   const prevPageHandler = (e) => {
-    if (currentPage === 1) {
+    if (currDisplayPg === 1) {
       return;
     } else {
-      setCurrentPage(currentPage - 1);
+      setCurrDisplayPg(currDisplayPg - 1);
     }
   };
   const prevDots = (e) => {
-    if (currentPage - 3 <= 1) {
-      setCurrentPage(currentPage + 1);
+    if (currDisplayPg - 3 <= 1) {
+      setCurrDisplayPg(tot_pages + 1);
     } else {
-      setCurrentPage(currentPage - 2);
+      setCurrDisplayPg(currDisplayPg - 2);
     }
   };
   const nextDots = (e) => {
-    if (currentPage + 3 >= tot_pages) {
-      setCurrentPage(tot_pages - 1);
+    if (currDisplayPg + 3 >= tot_pages) {
+      setCurrDisplayPg(tot_pages - 1);
     } else {
-      setCurrentPage(currentPage + 3);
+      setCurrDisplayPg(currDisplayPg + 3);
     }
   };
-  console.log("currentPage", currentPage);
-  return (
-    <div className="flex items-center">
-      <ul className="flex items-center justify-end text-sm">
-        <li className="flex items-center">
-          <button
-            className="outline-0 hover:text-cyan w-8"
-            onClick={prevPageHandler}
-          >
-            <img
-              src={paginationArrow}
-              alt="left arrow"
-              className="w-full h-auto rotate-180"
-            />
-          </button>
-        </li>
-        {currentPage + 1 === tot_pages || currentPage === tot_pages ? (
-          <li>
+  if (cryptoData && cryptoData.length >= perPage) {
+    return (
+      <div className="flex items-center">
+        <PerPageForm />
+        <ul className="flex items-center justify-end text-sm">
+          <li className="flex items-center">
             <button
-              className="text-lg outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center"
-              onClick={prevDots}
-            >
-              ...
-            </button>
-          </li>
-        ) : null}
-        {currentPage - 1 !== 0 ? (
-          <li>
-            <button
-              className=" outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center bg-gray-200 mx-1.5"
+              className="outline-0 hover:text-cyan w-8"
               onClick={prevPageHandler}
             >
-              {currentPage - 1}
+              <img
+                src={paginationArrow}
+                alt="left arrow"
+                className="w-full h-auto rotate-180"
+              />
             </button>
           </li>
-        ) : null}
-        <li>
-          <button
-            className=" outline-0 rounded-full  w-8 h-8 flex items-center justify-center bg-cyan text-gray-300 mx-1.5"
-            disabled
-          >
-            {currentPage}
-          </button>
-        </li>
-        {currentPage !== tot_pages ? (
+          {currDisplayPg + 1 === tot_pages || currDisplayPg === tot_pages ? (
+            // agr last ya second last page pr hen tu ye dots srf visible hongn otherwise nah
+            <li>
+              <button
+                className="text-lg outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center"
+                onClick={prevDots}
+              >
+                ...
+              </button>
+            </li>
+          ) : null}
+          {currDisplayPg - 1 !== 0 ? (
+            // agr men page no 1 pr hoon srf jb ye button nah dikhygaa
+            <li>
+              <button
+                className=" outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center bg-gray-200 mx-1.5"
+                onClick={prevPageHandler}
+              >
+                {currDisplayPg - 1}
+              </button>
+            </li>
+          ) : null}
           <li>
             <button
-              className=" outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center bg-gray-200 mx-1.5"
+              className=" outline-0 rounded-full  w-8 h-8 flex items-center justify-center bg-cyan text-gray-300 mx-1.5"
+              disabled
+            >
+              {currDisplayPg}
+            </button>
+          </li>
+          {currDisplayPg !== tot_pages && currDisplayPg + 1 !== tot_pages ? (
+            // yahan ham ye chah rahy hen k ye button hamary last page r us se pehly wala second last page pr show na hoo
+            <li>
+              <button
+                className=" outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center bg-gray-200 mx-1.5"
+                onClick={nextPageHandler}
+              >
+                {currDisplayPg + 1}
+              </button>
+            </li>
+          ) : null}
+          {currDisplayPg !== tot_pages && currDisplayPg + 1 !== tot_pages ? (
+            // yahan ham ye chah rahy hen k ye button hamary last page r us se pehly wala second last page pr show na hoo
+            <li>
+              <button
+                className="text-lg outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center"
+                onClick={nextDots}
+              >
+                ...
+              </button>
+            </li>
+          ) : null}
+          {currDisplayPg !== tot_pages ? (
+            // yahan ham ye chah rahy hen k ye button hamary last page pr show na hoo
+            <li>
+              <button
+                className=" outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center bg-gray-200 mx-1.5"
+                onClick={() => {
+                  setCurrDisplayPg(tot_pages);
+                }}
+              >
+                {tot_pages}
+              </button>
+            </li>
+          ) : null}
+          <li>
+            <button
               onClick={nextPageHandler}
+              className="outline-0 hover:text-cyan w-8"
             >
-              {currentPage + 1}
+              <img
+                src={paginationArrow}
+                alt="right arrow"
+                className="w-full h-auto"
+              />
             </button>
           </li>
-        ) : null}
-        {currentPage !== tot_pages && currentPage + 1 !== tot_pages ? (
-          <li>
-            <button
-              className="text-lg outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center"
-              onClick={nextDots}
-            >
-              ...
-            </button>
-          </li>
-        ) : null}
-        {currentPage !== tot_pages ? (
-          <li>
-            <button
-              className=" outline-0 hover:text-cyan rounded-full  w-8 h-8 flex items-center justify-center bg-gray-200 mx-1.5"
-              onClick={() => {
-                setCurrentPage(tot_pages);
-              }}
-            >
-              {tot_pages}
-            </button>
-          </li>
-        ) : null}
-        <li>
-          <button
-            onClick={nextPageHandler}
-            className="outline-0 hover:text-cyan w-8"
-          >
-            <img
-              src={paginationArrow}
-              alt="right arrow"
-              className="w-full h-auto"
-            />
-          </button>
-        </li>
-      </ul>
-    </div>
-  );
+        </ul>
+      </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Pagination;

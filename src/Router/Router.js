@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Crypto from "../pages/Crypto";
 import Saved from "../pages/Saved";
 import Trending from "../pages/Trending";
+import CryptoDetails from "../components/CryptoDetails";
 
 const Router = () => {
   return (
@@ -12,7 +13,9 @@ const Router = () => {
         {/* //nested Routing */}
         {/* hamne Home andr saary child routes islye bnaaye kiun k ham Home ko as a layout use krengn   */}
         <Route path="/" element={<Home />}>
-          <Route index path="/" element={<Crypto />} />
+          <Route path="/" element={<Crypto />}>
+            <Route path=":coinId" element={<CryptoDetails />} />
+          </Route>
           <Route path="saved" element={<Saved />} />
           <Route path="trending" element={<Trending />} />
         </Route>

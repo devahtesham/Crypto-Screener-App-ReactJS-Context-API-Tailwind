@@ -8,7 +8,7 @@ const Navigation = () => {
         to="/"
         end
         className={({ isActive }) => {
-          console.log(isActive, "Crypto link");
+          // console.log(isActive, "Crypto link");
           return `w-full text-base font-nunito m-2.5  border-0 rounded capitalize font-bold text-center ${
             isActive
               ? "bg-cyan text-gray-300"
@@ -21,7 +21,7 @@ const Navigation = () => {
       <NavLink
         to="trending"
         className={({ isActive }) => {
-          console.log(isActive, "trending link");
+          // console.log(isActive, "trending link");
           return `w-full text-base font-nunito m-2.5  border-0 rounded capitalize font-bold text-center ${
             isActive
               ? "bg-cyan text-gray-300"
@@ -34,7 +34,7 @@ const Navigation = () => {
       <NavLink
         to="saved"
         className={({ isActive }) => {
-          console.log(isActive, "Saved link");
+          // console.log(isActive, "Saved link");
           return `w-full text-base font-nunito m-2.5  border-0 rounded capitalize font-bold text-center ${
             isActive
               ? "bg-cyan text-gray-300"

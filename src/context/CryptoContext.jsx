@@ -18,12 +18,31 @@ export const ContextProvider = ({ children }) => {
   const [isTableDisplay, setIsTableDisplay] = useState(true);
   // sorting order
   const [sortOrder, setSortOrder] = useState("market_cap_desc");
-  console.log("sortOrder", sortOrder);
+  // current display page
+  const [currDisplayPg, setCurrDisplayPg] = useState(1); // bydefault page 1 render hogaa;
+  // totalno of coins
+  const [totalPages, setTotalPages] = useState(250);
   // this function is for getting all the coins details
+  // this function is for getting coins per page
+  const [perPage, setPerPage] = useState(10);
   const getApiData = async () => {
+    // to get list of coins
     try {
       const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortOrder}&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/list`
+      );
+      const data = response.data;
+      // console.log("original data", data.length);
+      setTotalPages(data.length);
+    } catch (error) {
+      console.log(error);
+    }
+    // to get coins data
+    try {
+      // console.log("perPage", perPage);
+      const response = await axios.get(
+        // coinSearch men by default( very first time ) " " empty string jaaega islye wo tamaam coins ka data show kregaa
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortOrder}&per_page=${perPage}&page=${currDisplayPg}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       );
       // console.log(response.data);
       const data = response.data;
@@ -45,9 +64,14 @@ export const ContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+  // this function is for reset coin detail
+  const resetFunc = () => {
+    setCurrDisplayPg(1);
+    setCoinSearch("");
+  };
   useEffect(() => {
     getApiData();
-  }, [coinSearch, currency, sortOrder]);
+  }, [coinSearch, currency, sortOrder, currDisplayPg, perPage]);
   // console.log("coinSearch", coinSearch);
 
   return (
@@ -62,6 +86,12 @@ export const ContextProvider = ({ children }) => {
         setIsTableDisplay,
         isTableDisplay,
         setSortOrder,
+        currDisplayPg,
+        setCurrDisplayPg,
+        totalPages,
+        resetFunc,
+        setPerPage,
+        perPage,
       }}
     >
       {children}
