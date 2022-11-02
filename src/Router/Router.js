@@ -16,8 +16,12 @@ const Router = () => {
           <Route path="/" element={<Crypto />}>
             <Route path=":coinId" element={<CryptoDetails />} />
           </Route>
-          <Route path="saved" element={<Saved />} />
-          <Route path="trending" element={<Trending />} />
+          <Route path="saved" element={<Saved />}>
+            <Route path=":coinId" element={<CryptoDetails />} />
+          </Route>
+          <Route path="trending" element={<Trending />}>
+            <Route path=":coinId" element={<CryptoDetails />} />
+          </Route>
         </Route>
       </Routes>
     </>

@@ -22,21 +22,26 @@ export const ContextProvider = ({ children }) => {
   const [currDisplayPg, setCurrDisplayPg] = useState(1); // bydefault page 1 render hogaa;
   // totalno of coins
   const [totalPages, setTotalPages] = useState(250);
-  // this function is for getting all the coins details
   // this function is for getting coins per page
   const [perPage, setPerPage] = useState(10);
+  // this is for coin related data which search from parameter
+  const [coinData, setCoinData] = useState("");
+
+  // this function is for getting all the coins details
   const getApiData = async () => {
+    setCryptoData(); // before every time call this api we set the value of setCryptoData empty to show our loader
+    setTotalPages(13220); // we known this api has following no of coins
     // to get list of coins
-    try {
-      const response = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/list`
-      );
-      const data = response.data;
-      // console.log("original data", data.length);
-      setTotalPages(data.length);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const response = await axios.get(
+    //     `https://api.coingecko.com/api/v3/coins/list`
+    //   );
+    //   const data = response.data;
+    //   // console.log("original data", data.length);
+    //   setTotalPages(data.length);
+    // } catch (error) {
+    //   console.log(error);
+    // }
     // to get coins data
     try {
       // console.log("perPage", perPage);
@@ -57,9 +62,23 @@ export const ContextProvider = ({ children }) => {
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/search?query=${userInput}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       const data = response.data.coins;
       setSearchInputData([...data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // this function is for getting coin data through param
+  const getCoinData = async (coinId) => {
+    setCoinData(); // before every time call this api we set the value of setCoinData empty to show our loader
+    try {
+      const response = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=false
+        `
+      );
+      // console.log(response);
+      setCoinData(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +88,7 @@ export const ContextProvider = ({ children }) => {
     setCurrDisplayPg(1);
     setCoinSearch("");
   };
+
   useEffect(() => {
     getApiData();
   }, [coinSearch, currency, sortOrder, currDisplayPg, perPage]);
@@ -92,6 +112,8 @@ export const ContextProvider = ({ children }) => {
         resetFunc,
         setPerPage,
         perPage,
+        coinData,
+        getCoinData,
       }}
     >
       {children}
