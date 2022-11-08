@@ -31,7 +31,7 @@ const SearchInputDataComp = ({ handleDebounceFunc }) => {
           type="text"
           name="search"
           placeholder="Search here ..."
-          className="h-full w-full rounded bg-gray-200 pl-2 required outline-0 border border-transparent focus:border-cyan placeholder:text-gray-100 "
+          className="lg:p-2 h-full w-full rounded bg-gray-200 pl-2 required outline-0 border border-transparent focus:border-cyan placeholder:text-gray-100 "
           onChange={inputValueHandler}
           value={inputValue}
         />

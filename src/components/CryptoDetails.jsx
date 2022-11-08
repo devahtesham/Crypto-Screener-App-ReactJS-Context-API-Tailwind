@@ -27,11 +27,11 @@ const CryptoDetails = () => {
           // stopPropagation is used to avoid event bubbling and event capturing. yahan is moodal closing men event buubbling horahi hy
           e.stopPropagation();
         }}
-        className="w-[65%] h-[75%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative"
+        className="xl:w-[65%] xl:h-[75%] md:w-[55%] w-[65%] h-[90%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative overflow-y-scroll"
       >
         {coinData ? (
-          <div className="w-full h-full flex justify-between  p-4">
-            <div className="flex flex-col w-[45%] h-full pr-2">
+          <div className="w-full h-full flex justify-between  p-4 xl:flex-row flex-col">
+            <div className="flex flex-col xl:w-[45%] w-full h-full pr-2">
               <div className="flex items-center w-full">
                 <img
                   className="w-[3rem] h-[3rem] mx-1.5"
@@ -259,7 +259,7 @@ const CryptoDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-[55%] h-full pl-3 ">
+            <div className="flex flex-col xl:w-[55%] w-full h-full pl-3 ">
               <Chart id={coinData.id} />
               <div className="flex  flex-col mt-8">
                 <h3 className=" text-white py-1">
@@ -283,7 +283,7 @@ const CryptoDetails = () => {
               </div>
             </div>
 
-            <div className="absolute bottom-8 right-8 flex items-center">
+            <div className="absolute xl:bottom-8 bottom-[-19rem] right-8 flex items-center xl:flex-row flex-col">
               {coinData.links.repos_url.github[0] && (
                 <a
                   className="text-lg px-1"
@@ -297,6 +297,7 @@ const CryptoDetails = () => {
                     width="1em"
                     height="1em"
                     viewBox="0 0 24 24"
+                    className="mb-1.5"
                     style={{
                       msTransform: "rotate(360deg)",
                       WebkitTransform: "rotate(360deg)",
@@ -328,6 +329,7 @@ const CryptoDetails = () => {
                     width="1em"
                     height="1em"
                     viewBox="0 0 1024 1024"
+                    className="mb-1.5"
                     style={{
                       msTransform: "rotate(360deg)",
                       WebkitTransform: "rotate(360deg)",
@@ -357,6 +359,7 @@ const CryptoDetails = () => {
                     width="1em"
                     height="1em"
                     viewBox="0 0 24 24"
+                    className="mb-1.5"
                     style={{
                       msTransform: "rotate(360deg)",
                       WebkitTransform: "rotate(360deg)",
@@ -386,6 +389,7 @@ const CryptoDetails = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
+                    className="mb-1.5"
                     viewBox="0 0 24 24"
                     style={{
                       msTransform: "rotate(360deg)",
