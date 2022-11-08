@@ -9,7 +9,7 @@ const Sort = () => {
     setSortOrder(e.target.value);
   };
   return (
-    <div className="mr-7 flex items-center">
+    <div className="sm:mr-7 flex items-center dropdown-panel">
       <label
         htmlFor="sort"
         className="relative flex justify-center items-center"
@@ -38,7 +38,7 @@ const Sort = () => {
       </label>
       <button
         onClick={resetFunc}
-        className="w-[2rem] ml-4 hover:scale-110 transition-all transition-ease"
+        className="w-[2rem] ml-4 hover:scale-110 transition-all transition-ease reset"
       >
         <svg
           className="w-full h-full fill-cyan"

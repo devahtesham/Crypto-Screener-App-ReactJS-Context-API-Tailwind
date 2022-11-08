@@ -37,9 +37,9 @@ const Pagination = () => {
   };
   if (cryptoData && cryptoData.length >= perPage) {
     return (
-      <div className="flex items-center">
+      <div className="flex items-center lg:flex-row flex-col">
         <PerPageForm />
-        <ul className="flex items-center justify-end text-sm">
+        <ul className="flex items-center justify-end text-sm lg:mb-0 mb-[0.7rem]">
           <li className="flex items-center">
             <button
               className="outline-0 hover:text-cyan w-8"

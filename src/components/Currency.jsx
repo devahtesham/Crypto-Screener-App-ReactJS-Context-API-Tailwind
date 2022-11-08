@@ -65,9 +65,9 @@ const Currency = () => {
     // console.log("currency", currency);
   };
   return (
-    <div className="flex mr-7">
+    <div className="flex lg:mr-7">
       <form
-        className="flex items-center font-nunito mr-12 relative"
+        className="flex items-center font-nunito lg:mr-12 relative"
         onSubmit={currencySubmitHandler}
       >
         <label

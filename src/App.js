@@ -1,4 +1,4 @@
-import "./App.css";
+import "../src/components/media/media.css";
 import ParticleJS from "./components/ParticleJS";
 import Router from "./Router/Router";
 

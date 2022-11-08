@@ -24,14 +24,14 @@ const SearchInputDataComp = ({ handleDebounceFunc }) => {
     <>
       {/* search form */}
       <form
-        className="w-96 relative flex items-center ml-7 font-nunito"
+        className="xl:w-96 lg:w-72 relative flex items-center ml-7 font-nunito"
         onSubmit={formSubmitHandler}
       >
         <input
           type="text"
           name="search"
           placeholder="Search here ..."
-          className="w-full rounded bg-gray-200 pl-2 required outline-0 border border-transparent focus:border-cyan placeholder:text-gray-100 "
+          className="h-full w-full rounded bg-gray-200 pl-2 required outline-0 border border-transparent focus:border-cyan placeholder:text-gray-100 "
           onChange={inputValueHandler}
           value={inputValue}
         />
@@ -99,7 +99,7 @@ const Search = () => {
   //   }, [inputValue]);
   //   =============== PREVENT UNNECESSARY API CALLS (DEBOUNCING IMPLEMENTATION) ==================
   return (
-    <div className="relative">
+    <div className="relative search-container">
       <SearchInputDataComp handleDebounceFunc={debouncFunc} />
     </div>
   );

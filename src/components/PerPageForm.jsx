@@ -19,7 +19,7 @@ const PerPageForm = () => {
   };
   return (
     <form
-      className="flex items-center font-nunito mr-12 relative"
+      className="flex items-center font-nunito lg:mr-12 relative lg:mb-0 mb-[0.7rem]"
       onSubmit={perPgValueSubmitHandler}
     >
       <label
