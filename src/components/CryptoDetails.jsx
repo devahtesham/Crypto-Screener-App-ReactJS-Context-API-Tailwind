@@ -27,7 +27,7 @@ const CryptoDetails = () => {
           // stopPropagation is used to avoid event bubbling and event capturing. yahan is moodal closing men event buubbling horahi hy
           e.stopPropagation();
         }}
-        className="xl:w-[65%] xl:h-[75%] md:w-[55%] w-[65%] h-[90%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative overflow-y-scroll"
+        className="xl:w-[65%] xl:h-[75%] sm:w-[70%] w-full h-[90%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative overflow-y-scroll"
       >
         {coinData ? (
           <div className="w-full h-full flex justify-between  p-4 xl:flex-row flex-col">
@@ -261,7 +261,7 @@ const CryptoDetails = () => {
             </div>
             <div className="flex flex-col xl:w-[55%] w-full h-full pl-3 ">
               <Chart id={coinData.id} />
-              <div className="flex  flex-col mt-8">
+              <div className="flex  flex-col md:mt-8 mt-[5rem]">
                 <h3 className=" text-white py-1">
                   <span className="text-gray-100 capitalize mr-1">
                     market cap rank:{" "}
@@ -283,7 +283,7 @@ const CryptoDetails = () => {
               </div>
             </div>
 
-            <div className="absolute xl:bottom-8 bottom-[-19rem] right-8 flex items-center xl:flex-row flex-col">
+            <div className="absolute xl:bottom-8 lg:bottom-[-19rem] bottom-[-28rem]  right-8 flex items-center xl:flex-row flex-col">
               {coinData.links.repos_url.github[0] && (
                 <a
                   className="text-lg px-1"
