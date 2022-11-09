@@ -1,41 +1,46 @@
-@media only screen and (max-width:1140px){
-    .search-container{
-        position: absolute;
-        top: -60px;
-        width: 100%;
-        height: 2rem;
-    }
-    .search-container form{
-        width: 94%;
+@media only screen and (max-width: 1140px) {
+  .search-container {
+    position: absolute;
+    top: -60px;
+    width: 100%;
+    height: 2rem;
+  }
+  .search-container form {
+    width: 94%;
     margin: auto;
     height: 100%;
-    }
-    .currency-sort-panel{
-        width: 100%;
-    justify-content: space-between;
-    padding: 0 22px;
-    }
-}
-@media only screen and (max-width:1024px){
-.dropdown-panel{
+  }
+  .currency-sort-panel {
     width: 100%;
     justify-content: space-between;
-        margin-top: 25px;
+    padding: 0 22px;
+  }
+  ul.backdrop-blur-md {
+    z-index: 99;
+    width: 94%;
+    left: 5%;
+  }
 }
-.currency-sort-panel{
+@media only screen and (max-width: 1024px) {
+  .dropdown-panel {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 25px;
+  }
+  .currency-sort-panel {
     flex-flow: column;
+  }
 }
-}
-@media only screen and (max-width:450px){
-    .currency-sort-panel{
-        position: relative;
-        align-items:start;
+@media only screen and (max-width: 450px) {
+  .currency-sort-panel {
+    position: relative;
+    align-items: start;
 
-        padding:0
-    }
-    button.reset{
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+    padding: 0;
+  }
+  button.reset {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
